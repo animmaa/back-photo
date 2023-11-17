@@ -17,7 +17,6 @@ app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-
 app.listen(port, () => {
   console.log(`Server run on ${port}`);
 });
