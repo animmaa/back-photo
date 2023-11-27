@@ -4,6 +4,9 @@ const db = connection.promise();
 
 const findAllUsers = () => db.query('SELECT * FROM user');
 
+const findUserByEmail = (email) =>
+  db.query('SELECT * FROM user WHERE email = ?', [email]);
+
 const createUser = (
   email,
   firstname,
@@ -34,5 +37,6 @@ const createUser = (
 
 module.exports = {
   findAllUsers,
+  findUserByEmail,
   createUser,
 };
