@@ -13,7 +13,6 @@ const userSchema = Joy.object({
   country: Joy.string().min(2).max(255).required(),
   city: Joy.string().min(2).max(255).required(),
   postalcode: Joy.number().integer().required(),
-  role: Joy.string().min(2).max(50).required(),
 });
 
 const userSchemaLogin = Joy.object({
@@ -58,7 +57,7 @@ const userController = {
       value.country,
       value.city,
       value.postalcode,
-      value.role
+      role = "user"
     );
 
     return res.json({
