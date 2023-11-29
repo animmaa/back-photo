@@ -14,10 +14,10 @@ const checkJwt = (req, res, next) => {
   }
 
   try {
-    jwt.verify(token, process.env.SECRET_KEY);
+    jwt.verify(token, process.env.SECRETE_KEY);
     return next();
   } catch (error) {
-    return res.status(401).json({ messageError: 'echech verification token' });
+    return res.status(401).json({ messageError: 'echec verification token' });
   }
 };
 
