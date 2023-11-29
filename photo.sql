@@ -13,7 +13,7 @@ CREATE TABLE `user` (
     `firstname` VARCHAR(100) NOT NULL,
     `lastname` VARCHAR(100) NOT NULL,
     `password` VARCHAR(255) NOT NULL,
-    `phone` INT,
+    `phone` VARCHAR(20),
     `address` VARCHAR(255) NOT NULL,
     `country` VARCHAR(255) NOT NULL,
     `city` VARCHAR(255) NOT NULL,
