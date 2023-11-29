@@ -1,6 +1,7 @@
 const Joy = require('joi');
 const argon2 = require('argon2');
-const userModel = require('../models/users-model');
+const userModel = require('../models/user-model');
+const { generateJwt } = require('../utils/auth');
 
 const userSchema = Joy.object({
   email: Joy.string().min(3).required().email(),
@@ -17,10 +18,10 @@ const userSchema = Joy.object({
 
 const userSchemaLogin = Joy.object({
   email: Joy.string().min(3).required().email(),
-  password: Joy.string().required()
+  password: Joy.string().required(),
 });
 
-const usersController = {
+const userController = {
   getAllUsers: async (_, res) => {
     const [users] = await userModel.findAllUsers();
     try {
@@ -67,10 +68,8 @@ const usersController = {
 
   login: async (req, res) => {
     const { value, error } = userSchemaLogin.validate(req.body);
-    // console.log(value, error);
 
     if (error) {
-      // on return l'erreur sil y en a une
       return res.status(400).json(error);
     }
 
@@ -90,18 +89,13 @@ const usersController = {
       });
     }
 
-    //const jwtkey = generateJwt(value.email);
+    const jwtkey = generateJwt(value.email);
 
-    // console.log(existedUser)
-
-    // return res.json({
-    //   credential: jwtkey,
-    //   id: existedUser.id,
-    // });
     return res.json({
-        message: "vous etes connecter"
-    })
+      credential: jwtkey,
+      id: existedUser.id,
+    });
   },
 };
 
-module.exports = usersController;
+module.exports = userController;
