@@ -16,7 +16,7 @@ const checkAdmin = (req, res, next) => {
   try {
     jwt.verify(token, process.env.SECRETE_KEY);
     const decodedToken = jwt.decode(token, { complete: true });
-    if (decodedToken.payload.role !== 'admin') {
+    if (decodedToken.payload.role !== process.env.ROLE_ADMIN) {
       return res.status(401).json({ messageError: "Vous n'etes pas admin" });
     }
 
