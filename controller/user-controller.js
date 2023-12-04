@@ -57,7 +57,7 @@ const userController = {
       value.country,
       value.city,
       value.postalcode,
-      role = "user"
+      (role = 'user')
     );
 
     return res.json({
@@ -88,7 +88,7 @@ const userController = {
       });
     }
 
-    const jwtkey = generateJwt(value.email);
+    const jwtkey = generateJwt(value.email, existedUser.role);
 
     return res.json({
       credential: jwtkey,
